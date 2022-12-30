@@ -9,9 +9,11 @@ import {
 } from "../../utils/axios-api-fn";
 import Input from "../Common/Input";
 import { useNavigate, useParams } from "react-router";
+import EditForm from "./EditForm";
 
 const TodosForm = () => {
   const [todos, setTodos] = useState([]);
+  const [editTodosIds, setEditTodosIds] = useState([]);
   const titleRef = useRef("");
   const contentRef = useRef("");
   const navigate = useNavigate();
@@ -36,22 +38,33 @@ const TodosForm = () => {
 
   const clickPutBtn = async ({ target }) => {
     //TODO: PUT 컴포넌트 추가 및 적용 필요
-    // const res = await putTodos({
-    //   id: target.dataset.id,
-    //   title: "putTitle",
-    //   content: "putContent",
-    // });
-    // console.log(res);
+    setEditTodosIds([...editTodosIds, target.dataset.id]);
   };
 
   const clickDeleteBtn = async ({ target }) => {
     const res = await deleteTodos(target.dataset.id);
     setTodos(todos.filter(({ id }) => id !== target.dataset.id));
+    setEditTodosIds(editTodosIds.filter((id) => id !== target.dataset.id));
   };
 
   const clickContent = ({ target }) => {
     navigate(`/todos/${target.dataset.id}`);
   };
+
+  const clickEditSubmitBtn = async (editId, title, content) => {
+    const res = await putTodos({
+      id: editId,
+      title,
+      content,
+    });
+    setTodos(todos.map((task) => (task.id === editId ? res : task)));
+    setEditTodosIds(editTodosIds.filter((id) => id !== editId));
+  };
+
+  const clickEditCancelBtn = (cancelId) => {
+    setEditTodosIds(editTodosIds.filter((id) => id !== cancelId));
+  };
+
   return (
     <div>
       <Input type="text" placeholder="title을 추가하세요" refValue={titleRef} />
@@ -66,7 +79,20 @@ const TodosForm = () => {
           <h3>Title : {title}</h3>
           {params.userId === id && <div>Content : {content}</div>}
           <Button onClick={clickContent} dataId={id} text={"content 확인"} />
-          <Button onClick={clickPutBtn} dataId={id} text={"수정하기"} />
+          {editTodosIds.includes(id) ? (
+            <EditForm
+              clickEditSubmitBtn={(title, content) => {
+                clickEditSubmitBtn(id, title, content);
+              }}
+              clickEditCancelBtn={() => {
+                clickEditCancelBtn(id);
+              }}
+            />
+          ) : (
+            <div>
+              <Button onClick={clickPutBtn} dataId={id} text={"수정하기"} />
+            </div>
+          )}
           <Button onClick={clickDeleteBtn} dataId={id} text={"삭제하기"} />
         </div>
       ))}
