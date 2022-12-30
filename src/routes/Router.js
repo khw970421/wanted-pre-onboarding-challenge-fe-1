@@ -1,9 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import Auth from "../pages/Auth";
-import Todos from "../pages/Todos";
 import NotFound from "../pages/NotFound";
-import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+import Todos from "../pages/Todos";
 
 function Router() {
   return (
@@ -17,7 +18,7 @@ function Router() {
         }
       />
       <Route
-        path="/todo"
+        path="/todos"
         element={
           <PrivateRoute>
             <Todos />
