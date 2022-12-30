@@ -1,7 +1,8 @@
 import React from "react";
+import TodosForm from "./../components/Todos/TodosForm";
 
 const Todos = () => {
-  return <div>Todos</div>;
+  return <TodosForm />;
 };
 
 export default Todos;

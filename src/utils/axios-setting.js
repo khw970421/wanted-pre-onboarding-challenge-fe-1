@@ -30,3 +30,22 @@ export const todosAxios = axios.create({
   baseURL,
   headers,
 });
+
+todosAxios.interceptors.request.use((config) => {
+  const accessToken = getLocalStorageToken();
+  if (accessToken && config.headers) {
+    config.headers["Authorization"] = `Bearer ${accessToken}`;
+  }
+  return config;
+});
+
+todosAxios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const { response } = error;
+    const { request } = error;
+    console.log(response);
+  }
+);
