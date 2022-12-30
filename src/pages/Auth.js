@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { SIGN_UP } from "../utils/constants";
+
+import AuthForm from "../components/Auth/AuthForm";
 
 function Auth() {
-  const [signState, setSignState] = useState(SIGN_UP);
 
-  return <div>Auth</div>;
+  return (
+      <AuthForm />
+  );
 }
 
 export default Auth;
