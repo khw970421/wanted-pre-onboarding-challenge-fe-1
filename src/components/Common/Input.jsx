@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-const AuthInput = ({ type, onChange, placeholder = "", style }) => {
+const Input = ({ type, onChange, placeholder = "", refValue = "", style }) => {
   return (
-    <Input
+    <Ipt
       type={type}
       onChange={onChange}
       placeholder={placeholder}
       style={style}
+      ref={refValue}
     />
   );
 };
 
-const Input = styled.input``;
+const Ipt = styled.input``;
 
-export default AuthInput;
+export default Input;

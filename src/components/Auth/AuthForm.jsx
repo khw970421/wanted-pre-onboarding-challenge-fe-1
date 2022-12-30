@@ -5,8 +5,8 @@ import {
 } from "../../utils/auth-validate-fn";
 import { postSignin, postSignup } from "./../../utils/axios-api-fn";
 
-import AuthButton from "./AuthButton";
-import AuthInput from "./AuthInput";
+import AuthButton from "../Common/Button";
+import AuthInput from "../Common/Input";
 import React from "react";
 import { saveLocalStorageToken } from "../../utils/local-storage-fn";
 import styled from "styled-components";
