@@ -8,11 +8,14 @@ import {
   deleteTodos,
 } from "../../utils/axios-api-fn";
 import Input from "../Common/Input";
+import { useNavigate, useParams } from "react-router";
 
 const TodosForm = () => {
   const [todos, setTodos] = useState([]);
   const titleRef = useRef("");
   const contentRef = useRef("");
+  const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
     getTodosAPI();
@@ -46,6 +49,9 @@ const TodosForm = () => {
     setTodos(todos.filter(({ id }) => id !== target.dataset.id));
   };
 
+  const clickContent = ({ target }) => {
+    navigate(`/todos/${target.dataset.id}`);
+  };
   return (
     <div>
       <Input type="text" placeholder="title을 추가하세요" refValue={titleRef} />
@@ -57,8 +63,9 @@ const TodosForm = () => {
       <Button text="추가하기" onClick={clickPostBtn} />
       {todos.map(({ title, content, id }) => (
         <div key={id}>
-          <div>{title}</div>
-          <div>{content}</div>
+          <h3>Title : {title}</h3>
+          {params.userId === id && <div>Content : {content}</div>}
+          <Button onClick={clickContent} dataId={id} text={"content 확인"} />
           <Button onClick={clickPutBtn} dataId={id} text={"수정하기"} />
           <Button onClick={clickDeleteBtn} dataId={id} text={"삭제하기"} />
         </div>

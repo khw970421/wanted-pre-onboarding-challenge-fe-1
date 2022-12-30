@@ -25,6 +25,14 @@ function Router() {
           </PrivateRoute>
         }
       />
+      <Route
+        path="/todos/:userId"
+        element={
+          <PrivateRoute>
+            <Todos />
+          </PrivateRoute>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
