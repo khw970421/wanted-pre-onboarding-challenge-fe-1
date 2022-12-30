@@ -16,8 +16,8 @@ import { useState } from "react";
 const AuthForm = () => {
   const [signState, setSignState] = useState(SIGN_UP);
   const [authValidProblem, setAuthValidProblem] = useState({
-    email: true,
-    password: true,
+    email: false,
+    password: false,
   });
   const [userData, setUserData] = useState({
     email: "",
