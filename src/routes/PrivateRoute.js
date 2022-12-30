@@ -1,5 +1,5 @@
-import { Navigate } from 'react-router-dom';
-import { getLocalStorageToken } from '../utils/local-storage-fn';
+import { getLocalStorageToken } from "../utils/local-storage-fn";
+import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
   const isLogined = getLocalStorageToken();
