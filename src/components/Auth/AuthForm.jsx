@@ -68,6 +68,7 @@ const AuthForm = () => {
       <AuthButton
         onClick={click}
         disabled={authValidProblem.email || authValidProblem.password}
+        text={signState === SIGN_UP ? "회원가입" : "로그인"}
       />
     </div>
   );
