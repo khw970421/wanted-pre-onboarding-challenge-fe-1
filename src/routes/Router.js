@@ -4,6 +4,7 @@ import Auth from "../pages/Auth";
 import NotFound from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import Root from "../pages/Root";
 import Todos from "../pages/Todos";
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
           </PublicRoute>
         }
       />
+      <Route path="/" element={<Root />} />
       <Route
         path="/todos"
         element={
